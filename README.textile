@@ -3,7 +3,8 @@ h2. Twitter Scheduler
 This is a script that can schedule posts to Twitter.  It runs in several modes:
 
 * Supply your Twitter username and password to start the daemon.  This will run in the background and post your tweets
-* Run with -a _time_ -t _message_ to scheduler a tweet at _time_ -- _message_ can be in quotes so you can use hashtags
+* Run with -a _time_ -t _message_ to scheduler a tweet at _time_ 
+* Note that _message_ can be in quotes so you can use hashtags
 * Run with -l to show a list of tweets in the database
 * Run with -d _id_ to delete a tweet
 
