@@ -14,7 +14,23 @@ rescue Exception => exception
   exit
 end
 
+begin
+  require 'highline/import'
+rescue LoadError
+end
+
 options = {}
+
+module UserInput
+  def self.secure_ask(question)
+    if Object.const_defined? :HighLine
+      ask(question) { |q| q.echo = '*' }
+    else
+      print question
+      STDIN.gets.chomp
+    end
+  end
+end
 
 ARGV.clone.options do |opts|
   script_name = File.basename($0)
@@ -44,6 +60,10 @@ end
 
 if options.include? 'username'
   @mode = :scheduler
+
+  unless options.include? 'password'
+    options['password'] = UserInput.secure_ask 'Please enter your password: '
+  end
 elsif options.include? 'tweet'
   @mode = :add
 elsif options.include? 'delete'
